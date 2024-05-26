@@ -1,0 +1,66 @@
+.sidebarContainer {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100%;
+    z-index: 1000;
+
+    .toggleButton {
+        width: 26px;
+        height: 44px;
+        background-color: #495057;
+    }
+}
+
+.sidebar {
+    width: 65px;
+    background-color: #FBFAFA;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+
+    .navItems {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        position: relative;
+
+        .navItem {
+            cursor: pointer;
+            width: 100%;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;  // To remove underline from links
+            color: inherit;  // To inherit text color
+
+            &:hover {
+                background-color: #495057;  // Hover background color
+                color: white;  // Text color on hover
+            }
+
+            &.active {
+                background-color:#3B1969;
+                color: #fff;  // Text color for active link
+            }
+
+            .fas {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .toggleExpand {
+        position: absolute;
+        left: -26px;
+        top: 44px;
+        width: 26px;
+        height: 44px;
+        background: beige;
+    }
+}
