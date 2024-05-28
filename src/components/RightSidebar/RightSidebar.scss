@@ -27,26 +27,30 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
-        position: relative;
 
         .navItem {
             cursor: pointer;
+            position: relative;
             width: 100%;
             height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;  // To remove underline from links
-            color: inherit;  // To inherit text color
+            text-decoration: none;  
+            color: inherit; 
 
             &:hover {
-                background-color: #495057;  // Hover background color
-                color: white;  // Text color on hover
+                background-color: #495057;  
+                color: white; 
             }
 
             &.active {
                 background-color:#3B1969;
-                color: #fff;  // Text color for active link
+                color: #fff;
+
+                .toggleExpand{
+                    display: block;
+                }
             }
 
             .fas {
@@ -58,9 +62,9 @@
     .toggleExpand {
         position: absolute;
         left: -26px;
-        top: 44px;
         width: 26px;
         height: 44px;
         background: beige;
+        display: none;
     }
 }
