@@ -30,11 +30,9 @@ const SubPanel: React.FC<SubPanelProps> = ({ navItem, onClose }) => {
   }, [navItem]);
 
   const handleNavClick = (item: NavItem) => {
-    if (item.subItems && item.subItems.length > 0) {
+    if (item.subItems) {
       setCurrentNav(item);
       setNavLevel(navLevel + 1); // Increment navigation level
-    } else {
-      onClose(); // Close the panel if there are no sub-items
     }
   };
 

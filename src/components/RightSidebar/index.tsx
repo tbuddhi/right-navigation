@@ -1,60 +1,55 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import SubPanel from '../SubPanel/SubPanel';
 import './RightSidebar.scss';
 
 interface NavItem {
-  id: number;
-  title: string;
-  mainNavItem?: string;
-  subItems?: { id: number; title: string }[];
+  id: number,
+  title: string,
+  mainNavItem?: string,
+  subItems?: { id: number; title: string }[]
 }
 
-const navItems: NavItem[] = [
-  { id: 1, title: 'Home' },
-  { id: 2, title: 'Chats' },
-  { id: 3, title: 'Apps' },
-  { id: 4, title: 'History' },
-  { id: 5, title: 'Notifications' }
-];
-
 const subNavItems: Record<string, NavItem[]> = {
-  Home: [],
   Chats: [
     { id: 1, mainNavItem: 'Chats', title: 'Chat Item 1', subItems: [{ id: 4, title: 'SubItem 1-1' }, { id: 5, title: 'SubItem 1-2' }] },
-    { id: 2, mainNavItem: 'Chats', title: 'Chat Item 2', subItems: [{ id: 6, title: 'SubItem 2-1' }, { id: 7, title: 'SubItem 2-2' }] }
+    { id: 2, mainNavItem: 'Chats', title: 'Chat Item 2', subItems: [{ id: 6, title: 'SubItem 2-1' }, { id: 7, title: 'SubItem 2-2' }] },
   ],
   Apps: [
-    { id: 3, mainNavItem: 'Apps', title: 'App Item 1', subItems: [{ id: 8, title: 'SubItem 3-1' }, { id: 9, title: 'SubItem 3-2' }] }
+    { id: 3, mainNavItem: 'Apps', title: 'App Item 1', subItems: [{ id: 8, title: 'SubItem 3-1' }, { id: 9, title: 'SubItem 3-2' }] },
   ],
   History: [
-    { id: 4, mainNavItem: 'History', title: 'History Item 1', subItems: [{ id: 10, title: 'SubItem 4-1' }, { id: 11, title: 'SubItem 4-2' }] }
+    { id: 4, mainNavItem: 'History', title: 'History Item 1', subItems: [{ id: 10, title: 'SubItem 4-1' }, { id: 11, title: 'SubItem 4-2' }] },
   ],
   Notifications: []
-};
+}
 
 const RightSidebar: React.FC = () => {
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
-  const [currentNavItem, setCurrentNavItem] = useState<NavItem | null>(null);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false)
+  const [currentNavItem, setCurrentNavItem] = useState<NavItem | null>(null)
+  const navigate = useNavigate()
 
   const handleNavItemClick = (title: string) => {
-    if (subNavItems[title].length > 0) {
+    if (title === 'Home') {
+      navigate('/');
+      setIsExpanded(false);
+      setCurrentNavItem(null);
+    } else if (subNavItems[title].length > 0) {
       setCurrentNavItem({ id: Date.now(), title });
-      // setIsExpanded(true);
     } else {
       setCurrentNavItem(null);
       setIsExpanded(false);
     }
-  };
+  }
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
-  };
+  }
 
   const handleClose = () => {
     setCurrentNavItem(null);
     setIsExpanded(false);
-  };
+  }
 
   return (
     <div className="sidebarContainer">
@@ -74,16 +69,22 @@ const RightSidebar: React.FC = () => {
               <div className="fas fa-bars">Z</div>
             </div>
           )}
-          {navItems.map((navItem) => (
+
+          <NavLink to="/" end className="navItem" onClick={() => handleNavItemClick('Home')}>
+            <i className="fas fa-home"></i>
+            <div>Home</div>
+          </NavLink>
+
+          {Object.keys(subNavItems).map((key) => (
             <NavLink
-              key={navItem.id}
-              to={`/${navItem.title.toLowerCase()}`}
+              to={`/${key.toLowerCase()}`}
+              key={key}
               className="navItem"
-              onClick={() => handleNavItemClick(navItem.title)}
+              onClick={() => handleNavItemClick(key)}
             >
-              <i className={`fas fa-${navItem.title.toLowerCase()}`}></i>
-              <div>{navItem.title}</div>
-              {subNavItems[navItem.title].length > 0 && !isExpanded && (
+              <i className={`fas fa-${key.toLowerCase()}`}>test</i>
+              <div>{key}</div>
+              {subNavItems[key].length > 0 && !isExpanded && (
                 <div className="toggleExpand" onClick={toggleExpand}>
                   <div className="fas fa-bars">Z</div>
                 </div>
