@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="20"
+   height="20"
+   viewBox="0 0 20 20"
+   fill="none"
+   version="1.1"
+   id="svg12"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <mask
+     id="path-2-inside-1_1_109"
+     fill="#ffffff">
+    <path
+       fill-rule="evenodd"
+       clip-rule="evenodd"
+       d="m 31.0908,16.2133 v 6.3463 c 0,0.2025 0.1195,0.3905 0.3156,0.4944 l 4.156,2.5 c 0.3072,0.1639 0.7065,0.0756 0.8903,-0.1978 0.1844,-0.2729 0.0851,-0.6277 -0.2227,-0.791 L 32.3896,22.233 v -6.0197 c 0,-0.3185 -0.2909,-0.5769 -0.6494,-0.5769 -0.3585,0 -0.6494,0.2584 -0.6494,0.5769 z"
+       id="path1" />
+  </mask>
+  <rect
+     y="-12"
+     width="64"
+     height="44"
+     fill="#3b1969"
+     id="rect4"
+     x="-22"
+     style="display:none" />
+  <circle
+     cx="10"
+     cy="10"
+     r="10"
+     fill="#ffffff"
+     id="circle4" />
+  <path
+     fill-rule="evenodd"
+     clip-rule="evenodd"
+     d="m 9.0908,4.213 v 6.347 c 0,0.202 0.1195,0.39 0.3156,0.494 l 4.156,2.5 c 0.3072,0.164 0.7065,0.076 0.8903,-0.198 0.1844,-0.273 0.0851,-0.628 -0.2227,-0.791 l -3.8404,-2.332 v -6.02 c 0,-0.318 -0.2909,-0.577 -0.6494,-0.577 -0.3585,0 -0.6494,0.259 -0.6494,0.577 z"
+     fill="url(#paint2_linear_1_109)"
+     id="path5"
+     style="fill:url(#paint2_linear_1_109)" />
+  <defs
+     id="defs12">
+    <linearGradient
+       id="paint2_linear_1_109"
+       x1="33.8181"
+       y1="103.636"
+       x2="33.8181"
+       y2="113.636"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-22,-100)">
+      <stop
+         stop-color="#1C6DFF"
+         id="stop11" />
+      <stop
+         offset="1"
+         stop-color="#C025FF"
+         id="stop12" />
+    </linearGradient>
+  </defs>
+</svg>

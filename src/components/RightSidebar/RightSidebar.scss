@@ -15,7 +15,7 @@
 }
 
 .sidebar {
-    width: 65px;
+    width: 64px;
     background-color: #FBFAFA;
     display: flex;
     flex-direction: column;
@@ -38,6 +38,7 @@
             justify-content: center;
             text-decoration: none;  
             color: inherit; 
+            margin-top: 0.5rem;
 
             &:hover {
                 background-color: #495057;  
