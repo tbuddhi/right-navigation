@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Box, SvgIcon } from '@mui/material';
+import { Box, Avatar } from '@mui/material';
 import SubPanel from '../SubPanel/SubPanel';
-import BellIcon from 'bell_icon.svg';
+import AvatarImage from '../../assets/person_f.png'
 import './RightSidebar.scss';
 
 interface NavItem {
   id: number;
   title: string;
+  labelIcon?: string;
   mainNavItem?: string;
   subItems?: NavItem[];
 }
 
 const subNavItems: Record<string, NavItem[]> = {
   Chats: [
-    { id: 1, 
-      mainNavItem: 'Chats', 
-      title: 'Chat Item 1', subItems: [{ id: 4, title: 'SubItem 1-1' }, { id: 5, title: 'SubItem 1-2' }] },
-    { id: 2, mainNavItem: 'Chats', title: 'Chat Item 2', subItems: [{ id: 6, title: 'SubItem 2-1' }, { id: 7, title: 'SubItem 2-2' }] },
+    {
+      id: 1,
+      mainNavItem: 'Chats',
+      title: 'Label 1 here', labelIcon: 'icon-1', subItems: [{ id: 4, title: 'SubItem 1-1' }, { id: 5, title: 'SubItem 1-2' }]
+    },
+    { id: 2, mainNavItem: 'Chats', title: 'Label 2 here', labelIcon: 'icon-2', subItems: [{ id: 6, title: 'SubItem 2-1' }, { id: 7, title: 'SubItem 2-2' }] },
+    { id: 3, mainNavItem: 'Chats', title: 'Label 3 here', labelIcon: 'icon-3', subItems: [{ id: 6, title: 'SubItem 2-1' }, { id: 7, title: 'SubItem 2-2' }] },
   ],
   Apps: [
     { id: 3, mainNavItem: 'Apps', title: 'App Item 1', subItems: [{ id: 8, title: 'SubItem 3-1' }, { id: 9, title: 'SubItem 3-2' }] },
@@ -28,21 +32,11 @@ const subNavItems: Record<string, NavItem[]> = {
   Notifications: []
 };
 
-// interface NavIconProps {
-//   iconType: string;
-// }
-
-// const NavIcon: React.FC<NavIconProps> = ({ iconType }) => {
-//   switch (iconType) {
-//     case 'Notifications':
-//       return <SvgIcon component={BellIcon} inheritViewBox />;
-//     case 'Home':
-//       return <SvgIcon component={BellIcon} inheritViewBox />;
-//     default:
-//       return null; // Or return a default icon
-//   }
-// };
-
+const NavIcon: React.FC = () => {
+  return (
+    <span className="icon"></span>
+  );
+};
 
 const RightSidebar: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
@@ -75,37 +69,44 @@ const RightSidebar: React.FC = () => {
     <Box role="presentation" className="sidebarContainer">
       {isExpanded && (
         <div className="toggleButton toggleCollapse" onClick={toggleExpand}>
-          <i className="fas fa-bars">X</i>
+          <span className="collapse-ico"></span>
         </div>
       )}
       {isExpanded && <SubPanel navItem={currentNavItem} subNavItems={subNavItems} onClose={handleClose} />}
       <aside className="sidebar">
         <div className="profileAvatar">
-          <i className="fas fa-bars">Prof</i>
+          <Avatar alt="Profile Photo" src={AvatarImage} />
         </div>
         <nav className="navItems">
-          {!isExpanded && (
-            <div className="toggleExpand" onClick={toggleExpand}>
-              <div className="fas fa-bars">Z</div>
-            </div>
-          )}
 
-          <NavLink to="/" className="navItem" onClick={() => handleNavItemClick('Home')}>
-            <i className="fas fa-home"></i>
-            <div>Home</div>
+          <NavLink to="/" className="navItem home-ico" onClick={() => handleNavItemClick('Home')}>
+            <NavIcon />
           </NavLink>
 
           {Object.keys(subNavItems).map((key) => (
-            <NavLink key={key} to={`/${key.toLowerCase()}`} className="navItem" onClick={() => handleNavItemClick(key)}>
-              {/* <NavIcon iconType={key} /> */}
-              <img src={'bell_icon.svg'} alt={key} />
+            <NavLink
+              key={key}
+              to={`/${key.toLowerCase()}`}
+              className={`navItem ${key.toLowerCase()}`}
+              onClick={() => handleNavItemClick(key)}
+            >
+              <NavIcon />
               {subNavItems[key].length > 0 && !isExpanded && (
                 <div className="toggleExpand" onClick={toggleExpand}>
-                  <div className="fas fa-bars">Z</div>
+                  <span className="expand-ico"></span>
                 </div>
               )}
             </NavLink>
           ))}
+          <hr className='divider'/>
+          <div className='configNavItems'>
+            <NavLink to="/settings" className="navItem settings">
+              <NavIcon />
+            </NavLink>
+            <NavLink to="/logout" className="navItem logout">
+              <NavIcon />
+            </NavLink>
+          </div>
         </nav>
       </aside>
     </Box>

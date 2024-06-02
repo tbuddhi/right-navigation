@@ -6,27 +6,45 @@
     top: 0;
     height: 100%;
     z-index: 1000;
+    transition: 0.5s all;
 
     .toggleButton {
-        width: 26px;
-        height: 44px;
-        background-color: #495057;
+        display: flex;
+        cursor: pointer;
+        max-height: 44px;
+        position: relative;
+        top: 2rem;
+
+        .collapse-ico {
+            content: url('../../assets/svg/close_icon.svg');
+            max-width: 30px;
+        }
     }
 }
 
 .sidebar {
     width: 64px;
-    background-color: #FBFAFA;
+    background-color: #F2F2F2;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 0;
+    padding: 1rem 0;
+    border-left: 1px solid #F2F2F2;
+
+    .profileAvatar {
+        padding-top: 1rem;
+        height: 87px;
+        border-bottom: 1px dashed #B3B9C4;
+    }
 
     .navItems {
         display: flex;
         flex-direction: column;
+        flex: 1;
         align-items: center;
         width: 100%;
+        padding-top: 6px;
+        transition: 0.5s all;
 
         .navItem {
             cursor: pointer;
@@ -36,27 +54,140 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;  
-            color: inherit; 
+            text-decoration: none;
+            color: inherit;
             margin-top: 0.5rem;
+            transition: 0.5s all;
 
-            &:hover {
-                background-color: #495057;  
-                color: white; 
+            .icon {
+                width: 24px;
+                height: 24px;
             }
 
-            &.active {
-                background-color:#3B1969;
-                color: #fff;
+            &.home-ico {
+                .icon {
+                    content: url('../../../public/assets/home_icon.svg');
+                    transition: 0.5s all;
+                }
 
-                .toggleExpand{
-                    display: block;
+                &:hover .icon {
+                    content: url('../../../public/assets/home_icon_hover.svg');
+                    transition: 0.5s all;
+                }
+
+                &.active .icon {
+                    content: url('../../../public/assets/home_icon_active.svg');
+                    transition: 0.5s all;
                 }
             }
 
-            .fas {
-                margin-right: 10px;
+            &.chats {
+                .icon {
+                    content: url('../../../public/assets/chats_icon.svg');
+                }
+
+                &:hover .icon {
+                    content: url('../../../public/assets/chats_icon_hover.svg');
+                }
+
+                &.active .icon {
+                    content: url('../../../public/assets/chats_icon_active.svg');
+                }
             }
+
+            &.apps {
+                .icon {
+                    content: url('../../../public/assets/apps_icon.svg');
+                }
+
+                &:hover .icon {
+                    content: url('../../../public/assets/apps_icon.svg');
+                }
+
+                &.active .icon {
+                    content: url('../../../public/assets/apps_icon.svg');
+                }
+            }
+
+            &.history {
+                .icon {
+                    content: url('../../../public/assets/history_icon.svg');
+                }
+
+                &:hover .icon {
+                    content: url('../../../public/assets/history_icon_hover.svg');
+                }
+
+                &.active .icon {
+                    content: url('../../../public/assets/history_icon_active.svg');
+                }
+            }
+
+            &.notifications {
+                .icon {
+                    content: url('../../../public/assets/bell_icon.svg');
+                }
+
+                &:hover .icon {
+                    content: url('../../../public/assets/bell_icon_hover.svg');
+                }
+
+                &.active .icon {
+                    content: url('../../../public/assets/bell_icon_active.svg');
+                }
+            }
+
+            &.settings {
+                .icon {
+                    content: url('../../../public/assets/setting_icon.svg');
+                }
+
+                &:hover .icon {
+                    content: url('../../../public/assets/setting_icon_hover.svg');
+                }
+
+                &.active .icon {
+                    content: url('../../../public/assets/setting_icon_active.svg');
+                }
+            }
+
+            &.logout {
+                width: 40px;
+                height: 40px;
+                background: #FFF3F3;
+                border-radius: 7px;
+
+                .icon {
+                    content: url('../../assets/svg/logout_icon.svg');
+                    width: 20px;
+                    height: 20px;
+                }
+                // &:hover .icon {
+                //     content: url('../../../public/assets/setting_icon_hover.svg');
+                // }
+                // &.active .icon {
+                //     content: url('../../../public/assets/setting_icon_active.svg');
+                // }
+            }
+
+            &.active {
+                background-color: #3B1969;
+                color: #fff;
+
+                .toggleExpand {
+                    display: block;
+                }
+            }
+        }
+
+        .configNavItems {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            flex: 1;
+            padding-top: 1rem;
         }
     }
 
@@ -65,7 +196,18 @@
         left: -26px;
         width: 26px;
         height: 44px;
-        background: beige;
         display: none;
+
+        .expand-ico {
+            content: url('../../assets/svg/open_icon.svg');
+            background: transparent;
+        }
     }
+}
+
+.divider{
+    width: 60%;
+    margin: auto;
+    margin-top: 2.5rem;
+    border-top: 1px dashed #B3B9C4;
 }

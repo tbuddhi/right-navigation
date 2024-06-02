@@ -6,6 +6,7 @@ import HistoryPage from '../../pages/HistoryPage';
 import ChatPage from '../../pages/ChatPage';
 import AppsPage from '../../pages/AppsPage';
 import NotificationPage from '../../pages/Notification';
+import SettingsPage from '../../pages/Settings';
 
 const AppRoutes: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes: React.FC = () => {
         <Route path='/apps' element={<AppsPage />} />
         <Route path='/history' element={<HistoryPage />} />
         <Route path='/notifications' element={<NotificationPage />} />
+        <Route path='/settings' element={<SettingsPage />} />
         {/* Add more routes here */}
       </Route>
     </Routes>
