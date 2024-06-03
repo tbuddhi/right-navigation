@@ -75,7 +75,7 @@ const RightSidebar: React.FC = () => {
       {isExpanded && <SubPanel navItem={currentNavItem} subNavItems={subNavItems} onClose={handleClose} />}
       <aside className="sidebar">
         <div className="profileAvatar">
-          <Avatar alt="Profile Photo" src={AvatarImage} />
+          <Avatar className='customAvatar' alt="Profile Photo" src={AvatarImage} />
         </div>
         <nav className="navItems">
 

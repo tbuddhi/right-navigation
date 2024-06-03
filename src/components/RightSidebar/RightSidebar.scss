@@ -24,7 +24,7 @@
 
 .sidebar {
     width: 64px;
-    background-color: #F2F2F2;
+    background-color: #FBFAFA;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,6 +35,10 @@
         padding-top: 1rem;
         height: 87px;
         border-bottom: 1px dashed #B3B9C4;
+
+        .customAvatar{
+            box-shadow: 0 2px 6px 0px rgb(0 0 0 / 15%);
+        }
     }
 
     .navItems {

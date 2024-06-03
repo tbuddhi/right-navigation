@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import './SubPanel.scss';
 import { NavLink } from 'react-router-dom';
-import { Stack, Box, Link, CardHeader, Avatar, Typography } from '@mui/material';
+import { Stack, Box, Link, CardHeader, Avatar, Typography, Button, Divider, List, ListItem } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import AvatarImage from '../../assets/person_f.png'
-
+import AvatarImage from '../../assets/person_f.png';
+import './SubPanel.scss'
 
 interface NavItem {
   id: number;
@@ -20,17 +19,89 @@ interface SubPanelProps {
   onClose: () => void;
 }
 
-const Item = styled(Box)(() => ({
-  textAlign: 'center',
-  color: '#181818',
-  fontSize: '20px',
-  fontWeight: 700,
-  lineHeight: 2,
-  display: 'flex',
-  alignItems: 'center'
+const SubPanelContainer = styled(Box)(({ theme }) => ({
+  backgroundColor: '#FBFBFB',
+  padding: '1rem 1.4rem',
+  width: '280px',
+  height: '100%',
+  boxShadow: 'inset 0 0 33px rgb(0 0 0 / 7%)',
+  transition: '0.5s all',
+  fontFamily: '"Roboto", sans-serif',
 }));
 
-const SubPanel: React.FC<SubPanelProps> = ({ navItem, subNavItems }) => {
+const PanelHeader = styled(Box)(({ theme }) => ({
+  paddingTop: '1rem',
+  paddingBottom: '1.5rem',
+  borderBottom: '1px dashed #B3B9C4',
+}));
+
+const PanelTitle = styled(Typography)(({ theme }) => ({
+  margin: 0,
+  fontSize: '20px',
+  fontWeight: 700,
+  color: '#181818',
+  lineHeight: 1
+}));
+
+const SubLevel2 = styled(Box)(({ theme }) => ({
+  paddingTop: '1.2rem',
+}));
+
+const StepBackButton = styled(Button)(({ theme }) => ({
+  fontSize: '16px',
+  color: '#256AFF',
+  textDecoration: 'underline',
+  fontWeight: '400'
+}));
+
+const SubNavList = styled(List)(({ theme }) => ({
+  listStyleType: 'none',
+  padding: 0,
+  marginTop: '1rem',
+  marginBottom: '1rem'
+}));
+
+const SubNavItem = styled(ListItem)(({ theme }) => ({
+  cursor: 'pointer',
+  padding: '10px 0',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  '&:hover': {
+    backgroundColor: '#f7f7f7',
+  }
+}));
+
+const CustomNavLink = styled(NavLink)(({ theme }) => ({
+  color: '#256AFF',
+  fontWeight: 400,
+  fontSize: '16px',
+  lineHeight: 2.7,
+}));
+
+const SubNavIcon = styled(Box)(({ theme }) => ({
+  width: '24px',
+  marginRight: '0.75rem',
+  '&.icon-1': {
+    content: 'url("/assets/svg/agent_icon.svg")',
+  },
+  '&.icon-2': {
+    content: 'url("/assets/svg/people_icon.svg")',
+  },
+  '&.icon-3': {
+    content: 'url("/assets/svg/dataset_icon.svg")',
+  },
+}));
+
+const ArrowIcon = styled(Box)(({ theme }) => ({
+  content: 'url("/assets/svg/right_arrow.svg")',
+}));
+
+const ArrowBackwardIcon = styled(Box)(({ theme }) => ({
+  content: 'url("/assets/svg/arrow_backward.svg")',
+}));
+
+const SubPanel: React.FC<SubPanelProps> = ({ navItem, subNavItems, onClose }) => {
   const [currentNav, setCurrentNav] = useState<NavItem | null>(null);
 
   useEffect(() => {
@@ -48,92 +119,87 @@ const SubPanel: React.FC<SubPanelProps> = ({ navItem, subNavItems }) => {
   };
 
   return (
-    <div className="subPanel">
+    <SubPanelContainer>
       {currentNav && currentNav !== navItem ? (
-        <div className='subLevel-2'>
+        <SubLevel2>
           <Stack direction="row" justifyContent="space-between" alignItems="center">
-            <Item>Label here</Item>
-            <Item><Link href="#" variant="body2" color={'#256AFF'}>Label here</Link></Item>
+            <Box textAlign="center" color="#181818" fontSize="20px" fontWeight={700} lineHeight={2}>Label here</Box>
+            <Box textAlign="center" color="#181818" fontSize="20px" fontWeight={700} lineHeight={2}>
+              <Link href="#" variant="body2" color="primary">Label here</Link>
+            </Box>
           </Stack>
 
           {navItem && (
-            <div className='stepBackWrapper'>
-              <button onClick={handleBackClick}>
-                Back
-              </button>
-            </div>
+            <Box mb={2}>
+              <StepBackButton startIcon={<ArrowBackwardIcon />} onClick={handleBackClick}>Back</StepBackButton>
+            </Box>
           )}
           <section>
-            <Box>
-              <Typography variant='subtitle1'>
-                Active
-              </Typography>
+            <Box mb={3}>
+              <Typography className='customTypo2'>Active</Typography>
               <CardHeader
-                sx={{ alignItems: 'flex-start' }}
-                avatar={
-                  <Avatar alt="Profile Photo" src={AvatarImage} />
+                sx={{ alignItems: 'flex-start'}}
+                avatar={<Avatar alt="Profile Photo" src={AvatarImage} />}
+                title="Label here"
+                subheader={
+                  <Stack direction="column">
+                    <Typography>Label here</Typography>
+                    <Link href="#">Label here</Link>
+                  </Stack>
                 }
-                title="Lable here"
-                subheader={<Stack direction={'column'}>
-                  <Typography>Lable here</Typography>
-                  <Link href='#'>Label here</Link>
-                </Stack>}
               />
-              <Typography variant='subtitle1'>
-                Label here
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-                No custom Label here
-              </Typography>
+              <Typography className='customTypo2'>Label here</Typography>
+              <Typography className='customTypo3'>No custom Label here</Typography>
             </Box>
-
           </section>
           <section>
-            <Box>
-              <Typography variant='subtitle1'>
-                Suggested Label here
-              </Typography>
+            <Box mb={2}>
+              <Typography className='customTypo2'>Suggested Label here</Typography>
               <CardHeader
-                avatar={
-                  <Avatar alt="Profile Photo" src={AvatarImage} />
-                }
+                avatar={<Avatar alt="Profile Photo" src={AvatarImage} />}
                 title="Label here"
               />
             </Box>
           </section>
-          <hr className='divider' />
-          <Box>
-            <Link href="#" variant="body2" color={'#256AFF'}>Label here</Link>
+          <Divider />
+          <Box mt={2}>
+            <Link href="#" variant="body2" color="primary">Label here</Link>
           </Box>
 
-          {navItem?.title !== 'Chats' && <ul>
-            {currentNav.subItems?.map((subItem) => (
-              <li key={subItem.id} onClick={() => handleNavClick(subItem)}>
-                {subItem.title}
-              </li>
-            ))}
-          </ul>}
-        </div>
+          {navItem?.title !== 'Chats' && (
+            <SubNavList>
+              {currentNav.subItems?.map((subItem) => (
+                <SubNavItem key={subItem.id} onClick={() => handleNavClick(subItem)}>
+                  <Box display="flex" alignItems="center">
+                    <SubNavIcon className={`subNav-icon ${subItem.labelIcon}`}></SubNavIcon>
+                    <Typography>{subItem.title}</Typography>
+                  </Box>
+                  <ArrowIcon className="arrow-icon"></ArrowIcon>
+                </SubNavItem>
+              ))}
+            </SubNavList>
+          )}
+        </SubLevel2>
       ) : (
         <>
-          <div className="panelHeader">
-            <h5>User Name</h5>
-            <NavLink to='/login'>Switch to admin account</NavLink>
-          </div>
-          <ul className='subNav-item'>
+          <PanelHeader>
+            <PanelTitle>User Name</PanelTitle>
+            <CustomNavLink to='/login'>Switch to admin account</CustomNavLink>
+          </PanelHeader>
+          <SubNavList>
             {navItem && subNavItems[navItem.title]?.map((item) => (
-              <li key={item.id} onClick={() => handleNavClick(item)}>
-                <div className='labelWrapper'>
-                  <span className={`subNav-icon ${item.labelIcon}`}></span>
-                  {item.title}
-                </div>
-                <span className='arrow-icon'></span>
-              </li>
+              <SubNavItem key={item.id} onClick={() => handleNavClick(item)}>
+                <Box display="flex" alignItems="center">
+                  <SubNavIcon className={`subNav-icon ${item.labelIcon}`}></SubNavIcon>
+                  <Typography className='customTypo1'>{item.title}</Typography>
+                </Box>
+                <ArrowIcon className="arrow-icon"></ArrowIcon>
+              </SubNavItem>
             ))}
-          </ul>
+          </SubNavList>
         </>
       )}
-    </div>
+    </SubPanelContainer>
   );
 };
 
