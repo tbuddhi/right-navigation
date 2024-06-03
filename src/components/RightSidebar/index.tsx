@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Box, Avatar, Badge } from '@mui/material';
-import SubPanel from '../SubPanel/SubPanel';
+import { Box, Avatar, Badge, styled, List } from '@mui/material';
+import SubPanel from '../SubPanel';
 import AvatarImage from '../../assets/person_f.png'
 import './RightSidebar.scss';
 
@@ -38,6 +38,27 @@ const NavIcon: React.FC = () => {
   );
 };
 
+const SidebarContainer = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'row',
+  position: 'fixed',
+  right: 0,
+  top: 0,
+  height: '100%',
+  zIndex: 1000,
+  transition: '0.5s all',
+}));
+
+const NavItems = styled(List)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  flex: 1,
+  alignItems: 'center',
+  width: '100%',
+  paddingTop: 6,
+  transition: '0.5s all',
+}));
+
 const RightSidebar: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [currentNavItem, setCurrentNavItem] = useState<NavItem | null>(null);
@@ -66,18 +87,18 @@ const RightSidebar: React.FC = () => {
   };
 
   return (
-    <Box role="presentation" className="sidebarContainer">
+    <SidebarContainer role="presentation" className='sidebarContainer'>
       {isExpanded && (
-        <div className="toggleButton toggleCollapse" onClick={toggleExpand}>
+        <Box className="toggleButton toggleCollapse" onClick={toggleExpand}>
           <span className="collapse-ico"></span>
-        </div>
+        </Box>
       )}
       {isExpanded && <SubPanel navItem={currentNavItem} subNavItems={subNavItems} onClose={handleClose} />}
       <aside className="sidebar">
-        <div className="profileAvatar">
+        <Box className="profileAvatar">
           <Avatar className='customAvatar' alt="Profile Photo" src={AvatarImage} />
-        </div>
-        <nav className="navItems">
+        </Box>
+        <NavItems className="navItems">
 
           <NavLink to="/" className="navItem home-ico" onClick={() => handleNavItemClick('Home')}>
             <NavIcon />
@@ -99,24 +120,24 @@ const RightSidebar: React.FC = () => {
                 },}}>
               </Badge>}
               {subNavItems[key].length > 0 && !isExpanded && (
-                <div className="toggleExpand" onClick={toggleExpand}>
+                <Box className="toggleExpand" onClick={toggleExpand}>
                   <span className="expand-ico"></span>
-                </div>
+                </Box>
               )}
             </NavLink>
           ))}
           <hr className='divider'/>
-          <div className='configNavItems'>
+          <Box className='configNavItems'>
             <NavLink to="/settings" className="navItem settings">
               <NavIcon />
             </NavLink>
             <NavLink to="/logout" className="navItem logout">
               <NavIcon />
             </NavLink>
-          </div>
-        </nav>
+          </Box>
+        </NavItems>
       </aside>
-    </Box>
+    </SidebarContainer>
   );
 };
 
