@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Box, Avatar } from '@mui/material';
+import { Box, Avatar, Badge } from '@mui/material';
 import SubPanel from '../SubPanel/SubPanel';
 import AvatarImage from '../../assets/person_f.png'
 import './RightSidebar.scss';
@@ -91,6 +91,13 @@ const RightSidebar: React.FC = () => {
               onClick={() => handleNavItemClick(key)}
             >
               <NavIcon />
+              { key === 'Notifications' && 
+              <Badge
+                variant="dot" 
+                sx={{top: '-6px', left: '-5px', '& .MuiBadge-dot': {
+                  backgroundColor: '#00E132',
+                },}}>
+              </Badge>}
               {subNavItems[key].length > 0 && !isExpanded && (
                 <div className="toggleExpand" onClick={toggleExpand}>
                   <span className="expand-ico"></span>

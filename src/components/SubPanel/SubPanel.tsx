@@ -1,8 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Stack, Box, Link, CardHeader, Avatar, Typography, Button, Divider, List, ListItem } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import AvatarImage from '../../assets/person_f.png';
+import { Stack, Box, Link, CardHeader, Avatar, Typography, Divider } from '@mui/material';
+import {
+  SubPanelContainer,
+  PanelHeader,
+  PanelTitle,
+  SubLevel2,
+  SubNavList,
+  SubNavItem,
+  CustomNavLink,
+  CustomSubHeader,
+  StepBackButton,
+  SubNavIcon,
+  ArrowIcon,
+  ArrowBackwardIcon,
+} from './CustomComponents';
+import ContactIcon from '../../assets/svg/headphone_icon.svg'
+import AiLogoWithBorder from '../../assets/svg/ai_logo_with_bg.svg'
 import './SubPanel.scss'
 
 interface NavItem {
@@ -18,88 +31,6 @@ interface SubPanelProps {
   subNavItems: Record<string, NavItem[]>;
   onClose: () => void;
 }
-
-const SubPanelContainer = styled(Box)(({ theme }) => ({
-  backgroundColor: '#FBFBFB',
-  padding: '1rem 1.4rem',
-  width: '280px',
-  height: '100%',
-  boxShadow: 'inset 0 0 33px rgb(0 0 0 / 7%)',
-  transition: '0.5s all',
-  fontFamily: '"Roboto", sans-serif',
-}));
-
-const PanelHeader = styled(Box)(({ theme }) => ({
-  paddingTop: '1rem',
-  paddingBottom: '1.5rem',
-  borderBottom: '1px dashed #B3B9C4',
-}));
-
-const PanelTitle = styled(Typography)(({ theme }) => ({
-  margin: 0,
-  fontSize: '20px',
-  fontWeight: 700,
-  color: '#181818',
-  lineHeight: 1
-}));
-
-const SubLevel2 = styled(Box)(({ theme }) => ({
-  paddingTop: '1.2rem',
-}));
-
-const StepBackButton = styled(Button)(({ theme }) => ({
-  fontSize: '16px',
-  color: '#256AFF',
-  textDecoration: 'underline',
-  fontWeight: '400'
-}));
-
-const SubNavList = styled(List)(({ theme }) => ({
-  listStyleType: 'none',
-  padding: 0,
-  marginTop: '1rem',
-  marginBottom: '1rem'
-}));
-
-const SubNavItem = styled(ListItem)(({ theme }) => ({
-  cursor: 'pointer',
-  padding: '10px 0',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  '&:hover': {
-    backgroundColor: '#f7f7f7',
-  }
-}));
-
-const CustomNavLink = styled(NavLink)(({ theme }) => ({
-  color: '#256AFF',
-  fontWeight: 400,
-  fontSize: '16px',
-  lineHeight: 2.7,
-}));
-
-const SubNavIcon = styled(Box)(({ theme }) => ({
-  width: '24px',
-  marginRight: '0.75rem',
-  '&.icon-1': {
-    content: 'url("/assets/svg/agent_icon.svg")',
-  },
-  '&.icon-2': {
-    content: 'url("/assets/svg/people_icon.svg")',
-  },
-  '&.icon-3': {
-    content: 'url("/assets/svg/dataset_icon.svg")',
-  },
-}));
-
-const ArrowIcon = styled(Box)(({ theme }) => ({
-  content: 'url("/assets/svg/right_arrow.svg")',
-}));
-
-const ArrowBackwardIcon = styled(Box)(({ theme }) => ({
-  content: 'url("/assets/svg/arrow_backward.svg")',
-}));
 
 const SubPanel: React.FC<SubPanelProps> = ({ navItem, subNavItems, onClose }) => {
   const [currentNav, setCurrentNav] = useState<NavItem | null>(null);
@@ -123,9 +54,9 @@ const SubPanel: React.FC<SubPanelProps> = ({ navItem, subNavItems, onClose }) =>
       {currentNav && currentNav !== navItem ? (
         <SubLevel2>
           <Stack direction="row" justifyContent="space-between" alignItems="center">
-            <Box textAlign="center" color="#181818" fontSize="20px" fontWeight={700} lineHeight={2}>Label here</Box>
-            <Box textAlign="center" color="#181818" fontSize="20px" fontWeight={700} lineHeight={2}>
-              <Link href="#" variant="body2" color="primary">Label here</Link>
+            <Box color="#181818" fontSize="20px" fontWeight={700} lineHeight={2}>Label here</Box>
+            <Box>
+              <Link href="#" className='customLink2'>Label here</Link>
             </Box>
           </Stack>
 
@@ -135,35 +66,55 @@ const SubPanel: React.FC<SubPanelProps> = ({ navItem, subNavItems, onClose }) =>
             </Box>
           )}
           <section>
-            <Box mb={3}>
+            <Box mb={1}>
               <Typography className='customTypo2'>Active</Typography>
               <CardHeader
-                sx={{ alignItems: 'flex-start'}}
-                avatar={<Avatar alt="Profile Photo" src={AvatarImage} />}
+                sx={{
+                  alignItems: 'flex-start',
+                  paddingLeft: '0',
+                  '& .MuiCardHeader-title': {
+                    color: '#0B0C0C',
+                    fontSize: '16px',
+                    fontWeight: '700'
+                  },
+                }}
+                avatar={<Avatar alt="Profile Photo" src={AiLogoWithBorder} />}
                 title="Label here"
                 subheader={
-                  <Stack direction="column">
+                  <CustomSubHeader direction="column">
                     <Typography>Label here</Typography>
                     <Link href="#">Label here</Link>
-                  </Stack>
+                  </CustomSubHeader>
                 }
               />
+            </Box>
+          </section>
+          <section>
+            <Box mb={3}>
               <Typography className='customTypo2'>Label here</Typography>
               <Typography className='customTypo3'>No custom Label here</Typography>
             </Box>
           </section>
           <section>
-            <Box mb={2}>
+            <Box mb={3}>
               <Typography className='customTypo2'>Suggested Label here</Typography>
               <CardHeader
-                avatar={<Avatar alt="Profile Photo" src={AvatarImage} />}
+                sx={{
+                  paddingLeft: '0',
+                  '& .MuiCardHeader-title': {
+                    color: '#7E7E7E',
+                    fontSize: '16px',
+                    fontWeight: '400'
+                  }
+                }}
+                avatar={<Avatar alt="Profile Photo" src={ContactIcon} />}
                 title="Label here"
               />
             </Box>
           </section>
-          <Divider />
-          <Box mt={2}>
-            <Link href="#" variant="body2" color="primary">Label here</Link>
+          <Divider sx={{ borderStyle: 'dashed', borderColor: '#B3B9C4' }} />
+          <Box mt={4}>
+            <Link href="#" className='customLink1'>Label here</Link>
           </Box>
 
           {navItem?.title !== 'Chats' && (
@@ -174,7 +125,6 @@ const SubPanel: React.FC<SubPanelProps> = ({ navItem, subNavItems, onClose }) =>
                     <SubNavIcon className={`subNav-icon ${subItem.labelIcon}`}></SubNavIcon>
                     <Typography>{subItem.title}</Typography>
                   </Box>
-                  <ArrowIcon className="arrow-icon"></ArrowIcon>
                 </SubNavItem>
               ))}
             </SubNavList>
