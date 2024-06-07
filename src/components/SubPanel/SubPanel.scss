@@ -149,11 +149,12 @@
   cursor: pointer;
   max-height: 44px;
   position: relative;
-  top: 2rem;
+  // top: 2rem;
   right: -1px;
 
   .collapse-ico {
       content: url('../../assets/svg/close_icon.svg');
       max-width: 30px;
+      max-height: 40px;
   }
 }

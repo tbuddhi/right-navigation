@@ -6,8 +6,6 @@ import './SubPanel.scss'
 export const SubPanelContainer = styled(Box)(({ theme }) => ({
     backgroundColor: '#FBFBFB',
     padding: '1rem 1.4rem',
-    width: '280px',
-    // height: '100%',
     boxShadow: 'inset 0 0 33px rgb(0 0 0 / 7%)',
     transition: '0.5s all',
     fontFamily: '"Roboto", sans-serif',
@@ -82,6 +80,7 @@ export const CustomSubHeader = styled(Stack)(({ theme }) => ({
 export const SubNavIcon = styled(Box)(({ theme }) => ({
     width: '24px',
     marginRight: '0.75rem',
+    content: 'url("/assets/svg/dataset_icon.svg")',
     '&.icon-1': {
         content: 'url("/assets/svg/agent_icon.svg")',
     },

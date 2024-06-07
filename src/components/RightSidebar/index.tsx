@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { Box, Avatar, Badge, styled, List, Drawer, useMediaQuery, useTheme } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { Drawer, useMediaQuery, useTheme } from '@mui/material';
+import { subNavItems, SidebarContainer } from './CustomComponents';
 import SubPanel from '../SubPanel';
-import AvatarImage from '../../assets/person_f.png';
+import FixedBar from './FixedBar';
 import './RightSidebar.scss';
-import { subNavItems } from './CustomComponents';
 
 interface NavItem {
   id: number;
@@ -13,31 +13,6 @@ interface NavItem {
   mainNavItem?: string;
   subItems?: NavItem[];
 }
-
-const NavIcon: React.FC = () => {
-  return <span className="icon"></span>;
-};
-
-const SidebarContainer = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'row',
-  position: 'fixed',
-  right: 0,
-  top: 0,
-  height: '100%',
-  zIndex: 1300, 
-  transition: '0.5s all',
-}));
-
-const NavItems = styled(List)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  flex: 1,
-  alignItems: 'center',
-  width: '100%',
-  paddingTop: 6,
-  transition: '0.5s all',
-}));
 
 const RightSidebar: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
@@ -66,54 +41,16 @@ const RightSidebar: React.FC = () => {
     setIsExpanded(false);
   };
 
+  const handleExpand = (value: boolean) => {
+    setIsExpanded(value);
+  };
+
   return (
-    <SidebarContainer role="presentation" className="sidebarContainer" ref={containerRef}>
-      <aside className="sidebar" style={{ zIndex: 1301 }}>
-        <Box className="profileAvatar">
-          <Avatar className="customAvatar" alt="Profile Photo" src={AvatarImage} />
-        </Box>
-        <NavItems className="navItems">
-          <NavLink to="/" className="navItem home-ico" onClick={() => handleNavItemClick('Home')}>
-            <NavIcon />
-          </NavLink>
-          {Object.keys(subNavItems).map((key) => (
-            <NavLink
-              key={key}
-              to={`/${key.toLowerCase()}`}
-              className={`navItem ${key.toLowerCase()}`}
-              onClick={() => handleNavItemClick(key)}
-            >
-              <NavIcon />
-              {key === 'Notifications' && (
-                <Badge
-                  variant="dot"
-                  sx={{
-                    top: '-6px',
-                    left: '-5px',
-                    '& .MuiBadge-dot': {
-                      backgroundColor: '#00E132',
-                    },
-                  }}
-                />
-              )}
-              {subNavItems[key].length > 0 && !isExpanded && (
-                <Box className="toggleExpand" onClick={() => setIsExpanded(true)}>
-                  <span className="expand-ico"></span>
-                </Box>
-              )}
-            </NavLink>
-          ))}
-          <hr className="divider" />
-          <Box className="configNavItems">
-            <NavLink to="/settings" className="navItem settings">
-              <NavIcon />
-            </NavLink>
-            <NavLink to="/logout" className="navItem logout">
-              <NavIcon />
-            </NavLink>
-          </Box>
-        </NavItems>
-      </aside>
+    <SidebarContainer role="presentation" ref={containerRef}>
+      {/* Fixed right panel */}
+      <FixedBar isExpanded={isExpanded} handleExpand={handleExpand} handleNavItemClick={handleNavItemClick} isMobile={isMobile}/>
+
+      {/* SubPanel Drawer */}
       <Drawer
         variant="temporary"
         open={isExpanded}
@@ -125,18 +62,18 @@ const RightSidebar: React.FC = () => {
           ...(isMobile ? {} : { hideBackdrop: true }),
         }}
         sx={{
-          '& .MuiDrawer-paper': { 
-            top: '0', 
-            right: '65px', 
-            height: '100%', 
-            zIndex: 1300, 
-            pointerEvents: 'auto', 
+          '& .MuiDrawer-paper': {
+            top: '0',
+            right: '65px',
+            height: '100%',
+            zIndex: 1300,
+            pointerEvents: 'auto',
             background: 'transparent',
-            boxShadow: 'none'
-           }
+            boxShadow: 'none',
+          },
         }}
       >
-        <SubPanel navItem={currentNavItem} subNavItems={subNavItems} onClose={handleClose} />
+        <SubPanel navItem={currentNavItem} subNavItems={subNavItems} onClose={handleClose} isMobile={isMobile}/>
       </Drawer>
     </SidebarContainer>
   );
