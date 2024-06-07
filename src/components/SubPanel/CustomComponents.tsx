@@ -7,10 +7,11 @@ export const SubPanelContainer = styled(Box)(({ theme }) => ({
     backgroundColor: '#FBFBFB',
     padding: '1rem 1.4rem',
     width: '280px',
-    height: '100%',
+    // height: '100%',
     boxShadow: 'inset 0 0 33px rgb(0 0 0 / 7%)',
     transition: '0.5s all',
     fontFamily: '"Roboto", sans-serif',
+    position: 'relative'
 }));
 
 export const PanelHeader = styled(Box)(({ theme }) => ({
@@ -48,7 +49,7 @@ export const SubNavList = styled(List)(({ theme }) => ({
 
 export const SubNavItem = styled(ListItem)(({ theme }) => ({
     cursor: 'pointer',
-    padding: '10px 0',
+    padding: '14px 0',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',

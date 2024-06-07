@@ -7,19 +7,6 @@
     height: 100%;
     z-index: 1000;
     transition: 0.5s all;
-
-    .toggleButton {
-        display: flex;
-        cursor: pointer;
-        max-height: 44px;
-        position: relative;
-        top: 2rem;
-
-        .collapse-ico {
-            content: url('../../assets/svg/close_icon.svg');
-            max-width: 30px;
-        }
-    }
 }
 
 .sidebar {
@@ -47,7 +34,7 @@
         flex: 1;
         align-items: center;
         width: 100%;
-        padding-top: 6px;
+        padding-top: 0.75rem;
         transition: 0.5s all;
 
         .navItem {

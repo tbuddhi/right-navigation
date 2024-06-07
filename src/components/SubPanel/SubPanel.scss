@@ -143,3 +143,17 @@
   font-size: 16px !important;
   font-weight: 400 !important;
 }
+
+.toggleButton {
+  display: flex;
+  cursor: pointer;
+  max-height: 44px;
+  position: relative;
+  top: 2rem;
+  right: -1px;
+
+  .collapse-ico {
+      content: url('../../assets/svg/close_icon.svg');
+      max-width: 30px;
+  }
+}

@@ -50,9 +50,15 @@ const SubPanel: React.FC<SubPanelProps> = ({ navItem, subNavItems, onClose }) =>
   };
 
   return (
+
+    <Stack direction={'row'} sx={{ height: '100%'}}>
+      <Box className="toggleButton toggleCollapse" onClick={onClose}>
+          <span className="collapse-ico"></span>
+        </Box>
     <SubPanelContainer>
       {currentNav && currentNav !== navItem ? (
         <SubLevel2>
+
           <Stack direction="row" justifyContent="space-between" alignItems="center">
             <Box color="#181818" fontSize="20px" fontWeight={700} lineHeight={2}>Label here</Box>
             <Box>
@@ -150,6 +156,7 @@ const SubPanel: React.FC<SubPanelProps> = ({ navItem, subNavItems, onClose }) =>
         </>
       )}
     </SubPanelContainer>
+    </Stack>
   );
 };
 

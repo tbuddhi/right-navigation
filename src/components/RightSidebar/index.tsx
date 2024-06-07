@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Box, Avatar, Badge, styled, List } from '@mui/material';
+import { Box, Avatar, Badge, styled, List, Drawer, useMediaQuery, useTheme } from '@mui/material';
 import SubPanel from '../SubPanel';
-import AvatarImage from '../../assets/person_f.png'
+import AvatarImage from '../../assets/person_f.png';
 import './RightSidebar.scss';
+import { subNavItems } from './CustomComponents';
 
 interface NavItem {
   id: number;
@@ -13,29 +14,8 @@ interface NavItem {
   subItems?: NavItem[];
 }
 
-const subNavItems: Record<string, NavItem[]> = {
-  Chats: [
-    {
-      id: 1,
-      mainNavItem: 'Chats',
-      title: 'Label 1 here', labelIcon: 'icon-1', subItems: [{ id: 4, title: 'SubItem 1-1' }, { id: 5, title: 'SubItem 1-2' }]
-    },
-    { id: 2, mainNavItem: 'Chats', title: 'Label 2 here', labelIcon: 'icon-2', subItems: [{ id: 6, title: 'SubItem 2-1' }, { id: 7, title: 'SubItem 2-2' }] },
-    { id: 3, mainNavItem: 'Chats', title: 'Label 3 here', labelIcon: 'icon-3', subItems: [{ id: 6, title: 'SubItem 2-1' }, { id: 7, title: 'SubItem 2-2' }] },
-  ],
-  Apps: [
-    { id: 3, mainNavItem: 'Apps', title: 'App Item 1', subItems: [{ id: 8, title: 'SubItem 3-1' }, { id: 9, title: 'SubItem 3-2' }] },
-  ],
-  History: [
-    { id: 4, mainNavItem: 'History', title: 'History Item 1', subItems: [{ id: 10, title: 'SubItem 4-1' }, { id: 11, title: 'SubItem 4-2' }] },
-  ],
-  Notifications: []
-};
-
 const NavIcon: React.FC = () => {
-  return (
-    <span className="icon"></span>
-  );
+  return <span className="icon"></span>;
 };
 
 const SidebarContainer = styled(Box)(({ theme }) => ({
@@ -45,7 +25,7 @@ const SidebarContainer = styled(Box)(({ theme }) => ({
   right: 0,
   top: 0,
   height: '100%',
-  zIndex: 1000,
+  zIndex: 1300, 
   transition: '0.5s all',
 }));
 
@@ -63,6 +43,9 @@ const RightSidebar: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const [currentNavItem, setCurrentNavItem] = useState<NavItem | null>(null);
   const navigate = useNavigate();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleNavItemClick = (title: string) => {
     if (title === 'Home') {
@@ -71,14 +54,11 @@ const RightSidebar: React.FC = () => {
       setCurrentNavItem(null);
     } else if (subNavItems[title].length > 0) {
       setCurrentNavItem({ id: Date.now(), title });
+      setIsExpanded(true);
     } else {
       setCurrentNavItem(null);
       setIsExpanded(false);
     }
-  };
-
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
   };
 
   const handleClose = () => {
@@ -87,23 +67,15 @@ const RightSidebar: React.FC = () => {
   };
 
   return (
-    <SidebarContainer role="presentation" className='sidebarContainer'>
-      {isExpanded && (
-        <Box className="toggleButton toggleCollapse" onClick={toggleExpand}>
-          <span className="collapse-ico"></span>
-        </Box>
-      )}
-      {isExpanded && <SubPanel navItem={currentNavItem} subNavItems={subNavItems} onClose={handleClose} />}
-      <aside className="sidebar">
+    <SidebarContainer role="presentation" className="sidebarContainer" ref={containerRef}>
+      <aside className="sidebar" style={{ zIndex: 1301 }}>
         <Box className="profileAvatar">
-          <Avatar className='customAvatar' alt="Profile Photo" src={AvatarImage} />
+          <Avatar className="customAvatar" alt="Profile Photo" src={AvatarImage} />
         </Box>
         <NavItems className="navItems">
-
           <NavLink to="/" className="navItem home-ico" onClick={() => handleNavItemClick('Home')}>
             <NavIcon />
           </NavLink>
-
           {Object.keys(subNavItems).map((key) => (
             <NavLink
               key={key}
@@ -112,22 +84,27 @@ const RightSidebar: React.FC = () => {
               onClick={() => handleNavItemClick(key)}
             >
               <NavIcon />
-              { key === 'Notifications' && 
-              <Badge
-                variant="dot" 
-                sx={{top: '-6px', left: '-5px', '& .MuiBadge-dot': {
-                  backgroundColor: '#00E132',
-                },}}>
-              </Badge>}
+              {key === 'Notifications' && (
+                <Badge
+                  variant="dot"
+                  sx={{
+                    top: '-6px',
+                    left: '-5px',
+                    '& .MuiBadge-dot': {
+                      backgroundColor: '#00E132',
+                    },
+                  }}
+                />
+              )}
               {subNavItems[key].length > 0 && !isExpanded && (
-                <Box className="toggleExpand" onClick={toggleExpand}>
+                <Box className="toggleExpand" onClick={() => setIsExpanded(true)}>
                   <span className="expand-ico"></span>
                 </Box>
               )}
             </NavLink>
           ))}
-          <hr className='divider'/>
-          <Box className='configNavItems'>
+          <hr className="divider" />
+          <Box className="configNavItems">
             <NavLink to="/settings" className="navItem settings">
               <NavIcon />
             </NavLink>
@@ -137,6 +114,30 @@ const RightSidebar: React.FC = () => {
           </Box>
         </NavItems>
       </aside>
+      <Drawer
+        variant="temporary"
+        open={isExpanded}
+        anchor="right"
+        onClose={isMobile ? handleClose : undefined}
+        ModalProps={{
+          container: containerRef.current,
+          style: { position: 'absolute', pointerEvents: isMobile ? 'auto' : 'none' },
+          ...(isMobile ? {} : { hideBackdrop: true }),
+        }}
+        sx={{
+          '& .MuiDrawer-paper': { 
+            top: '0', 
+            right: '65px', 
+            height: '100%', 
+            zIndex: 1300, 
+            pointerEvents: 'auto', 
+            background: 'transparent',
+            boxShadow: 'none'
+           }
+        }}
+      >
+        <SubPanel navItem={currentNavItem} subNavItems={subNavItems} onClose={handleClose} />
+      </Drawer>
     </SidebarContainer>
   );
 };
