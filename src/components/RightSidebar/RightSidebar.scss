@@ -82,11 +82,11 @@
                 }
 
                 &:hover .icon {
-                    content: url('../../../public/assets/apps_icon.svg');
+                    content: url('../../../public/assets/apps_icon_hover.svg');
                 }
 
                 &.active .icon {
-                    content: url('../../../public/assets/apps_icon.svg');
+                    content: url('../../../public/assets/apps_icon_active.svg');
                 }
             }
 
