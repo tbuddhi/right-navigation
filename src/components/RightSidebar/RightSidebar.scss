@@ -1,0 +1,188 @@
+.sidebar {
+    width: 64px;
+    background-color: #FBFAFA;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+    border-left: 1px solid #F2F2F2;
+    z-index: 1301;
+
+    .profileAvatar {
+        padding-top: 1rem;
+        height: 87px;
+        border-bottom: 1px dashed #B3B9C4;
+
+        .customAvatar{
+            box-shadow: 0 2px 6px 0px rgb(0 0 0 / 15%);
+        }
+    }
+
+    .navItems {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        align-items: center;
+        width: 100%;
+        padding-top: 0.75rem;
+        transition: 0.5s all;
+
+        .navItem {
+            cursor: pointer;
+            position: relative;
+            width: 100%;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: inherit;
+            margin-top: 0.5rem;
+            transition: 0.5s all;
+
+            .icon {
+                width: 24px;
+                height: 24px;
+            }
+
+            &.home-ico {
+                .icon {
+                    content: url('../../../public/assets/home_icon.svg');
+                    transition: 0.5s all;
+                }
+
+                &:hover .icon {
+                    content: url('../../../public/assets/home_icon_hover.svg');
+                    transition: 0.5s all;
+                }
+
+                &.active .icon {
+                    content: url('../../../public/assets/home_icon_active.svg');
+                    transition: 0.5s all;
+                }
+            }
+
+            &.chats {
+                .icon {
+                    content: url('../../../public/assets/chats_icon.svg');
+                }
+
+                &:hover .icon {
+                    content: url('../../../public/assets/chats_icon_hover.svg');
+                }
+
+                &.active .icon {
+                    content: url('../../../public/assets/chats_icon_active.svg');
+                }
+            }
+
+            &.apps {
+                .icon {
+                    content: url('../../../public/assets/apps_icon.svg');
+                }
+
+                &:hover .icon {
+                    content: url('../../../public/assets/apps_icon_hover.svg');
+                }
+
+                &.active .icon {
+                    content: url('../../../public/assets/apps_icon_active.svg');
+                }
+            }
+
+            &.history {
+                .icon {
+                    content: url('../../../public/assets/history_icon.svg');
+                }
+
+                &:hover .icon {
+                    content: url('../../../public/assets/history_icon_hover.svg');
+                }
+
+                &.active .icon {
+                    content: url('../../../public/assets/history_icon_active.svg');
+                }
+            }
+
+            &.notifications {
+                .icon {
+                    content: url('../../../public/assets/bell_icon.svg');
+                }
+
+                &:hover .icon {
+                    content: url('../../../public/assets/bell_icon_hover.svg');
+                }
+
+                &.active .icon {
+                    content: url('../../../public/assets/bell_icon_active.svg');
+                }
+            }
+
+            &.settings {
+                .icon {
+                    content: url('../../../public/assets/setting_icon.svg');
+                }
+
+                &:hover .icon {
+                    content: url('../../../public/assets/setting_icon_hover.svg');
+                }
+
+                &.active .icon {
+                    content: url('../../../public/assets/setting_icon_active.svg');
+                }
+            }
+
+            &.logout {
+                width: 40px;
+                height: 40px;
+                background: #FFF3F3;
+                border-radius: 7px;
+
+                .icon {
+                    content: url('../../assets/svg/logout_icon.svg');
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            &.active {
+                background-color: #3B1969;
+                color: #fff;
+
+                .toggleExpand {
+                    display: block;
+                }
+            }
+        }
+
+        .configNavItems {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            flex: 1;
+            padding-top: 1rem;
+        }
+    }
+
+    .toggleExpand {
+        position: absolute;
+        left: -26px;
+        width: 26px;
+        height: 44px;
+        display: none;
+
+        .expand-ico {
+            content: url('../../assets/svg/open_icon.svg');
+            background: transparent;
+        }
+    }
+}
+
+.divider{
+    width: 60%;
+    margin: auto;
+    margin-top: 2.5rem;
+    border-top: 1px dashed #B3B9C4;
+}
