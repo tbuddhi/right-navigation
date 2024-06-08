@@ -1,5 +1,5 @@
 import React from 'react'
-import { Drawer, useMediaQuery, useTheme } from '@mui/material';
+import { useMediaQuery, useTheme } from '@mui/material';
 import gImage1 from '../assets/png/guidence_1.png'
 import gImage2 from '../assets/png/guidence_2.png'
 import gImage3 from '../assets/png/guidence_3.png'
