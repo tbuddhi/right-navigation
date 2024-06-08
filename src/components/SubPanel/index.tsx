@@ -53,12 +53,12 @@ const SubPanel: React.FC<SubPanelProps> = ({ navItem, subNavItems, onClose, isMo
 
   const MobileHeader = styled(Box)(({ theme }) => ({
     position: 'absolute',
-    display: 'flex',
+    display: isMobile ? 'flex' : 'none',
     alignItems: 'center',
     top: 0,
     left: 0,
     height: 40,
-    width: '100%',
+    width: 'calc(100% - 17px)',
     zIndex: 1400,
     gap: '.5rem',
     paddingLeft: '1.1rem',
